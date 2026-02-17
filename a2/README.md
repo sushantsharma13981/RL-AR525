@@ -1,22 +1,8 @@
+﻿# Assignment: Drown hovering using Model-free control
+ The goal of this assignment is to implement **Monte Carlo Control** and **Q-Learning** algorithms to teach a drone to hover at target position `[x, y, z]`. Drone hovering is challenging because small action errors accumulate quickly and the drone can drift or oscillate. The drone must balance exploration vs. stability, learn from delayed rewards, and generalize across nearby states to hold a steady hover. The expected behaviour of drone is shown below:
+![Drone Hover Objective Demo](imgs/assignment_gif.gif)
 
-![Drone Hover Objective Demo](assignment_gif.gif)
-
-**Objective (see GIF above):** learn a control policy that keeps a **single** drone stable near the target hover point `[0, 0, 1]`.
-
-What You Should See During Visualization
-The drone should increasingly stabilize near `z = 1.0` as training progresses.
-In `td_learning.py`, the GUI window may close and reopen once: this is expected because the script runs **Q-Learning first**, then resets and runs **SARSA**.
-Console messages about threads/GL context shutdown/startup are normal PyBullet GUI lifecycle logs.
-
-Drone hovering is challenging because small action errors accumulate quickly and the drone can drift or oscillate.  
-The agent must balance exploration vs. stability, learn from delayed rewards, and generalize across nearby states to hold a steady hover.
-
-
-# RL Assignment: Drone Hover Task
-
-This repository contains a reinforcement learning assignment using the [gym-pybullet-drones](https://github.com/utiasDSL/gym-pybullet-drones) framework. Students implement **Monte Carlo Control** and **Q-Learning** algorithms to teach a drone to hover at target position `[0, 0, 1]`.
-
-## 🚀 What Students Will Learn
+## What Students Will Learn
 
 - **Monte Carlo Control**: First-visit MC with epsilon-greedy exploration
 - **Q-Learning**: Off-policy TD control with max Q-value updates
@@ -24,7 +10,7 @@ This repository contains a reinforcement learning assignment using the [gym-pybu
 - **Policy Improvement**: Greedy policies from learned Q-values
 - **Hyperparameter Tuning**: Finding optimal learning rates and exploration rates
 
-## ⚠️ Important: Dependencies
+## Important: Dependencies
 
 This assignment **requires** the `gym-pybullet-drones` package to be installed. You have two options:
 
@@ -48,7 +34,7 @@ git clone https://github.com/sadbhavsingh16/a2-ar525.git
 cd a2-ar525
 ```
 
-## 🎯 Task Description
+## Task Description
 
 **Environment**: HoverAviary - A single drone must hover at target position `[0, 0, 1]`
 
@@ -80,7 +66,8 @@ The state is discretized into 10 bins per dimension. Below is a visual of the XY
   - `discretize_state()` bounds and logic
   - Q-table shape (`get_q_table_shape()`)
   - Any plotting/analysis that assumes 3D state
-
+- In `td_learning.py`, the GUI window may close and reopen once: this is expected because the script runs **Q-Learning first**, then resets and runs **SARSA**.
+Console messages about threads/GL context shutdown/startup are normal PyBullet GUI lifecycle logs.
 ## Files
 
 | File | Description |
@@ -97,7 +84,7 @@ The state is discretized into 10 bins per dimension. Below is a visual of the XY
 
 ```bash
 # Navigate to the assignment directory
-cd rl_assignment/   # or a2-ar525/
+cd a2/   # or your-directory/
 
 # Create virtual environment (recommended)
 python -m venv venv
@@ -224,7 +211,7 @@ Then add it to README:
 
 **Passing Threshold**: 70% overall
 
-## 🎯 BONUS CHALLENGES (Up to 20 Extra Points!)
+## BONUS CHALLENGES (Extra Points!)
 
 Complete these advanced challenges for extra credit!
 
@@ -299,6 +286,8 @@ rl_assignment/
 3. Ensure both MC and TD pass (score >= 70%)
 4. **(Optional)** Complete `bonus_challenges.py` for extra credit
 5. Submit your `user_code.py` (and `bonus_challenges.py` if attempting bonuses)
+6. Please submit it on [**Google Form**](https://forms.gle/zEUeykZbJvzh8LWj8) as a single zip file named <A1_StudentID>.zip or <A1_StudentID1_StudentID2>.zip. The zip file should contain a full code, running instructions, and analysis in the PDF file.
+- The submission date is **5:00 pm IST on Thursday, 19 Mar, 2026**. Late submission will incur a daily 10% score adjustment for up to two days.
 
 ## References
 
@@ -308,5 +297,9 @@ rl_assignment/
 - [gym-pybullet-drones Documentation](https://github.com/utiasDSL/gym-pybullet-drones)
 
 ## License
-
 This assignment is provided for educational purposes.
+
+**Good luck with your implementation! 🚀**
+
+## Acknowledgements
+Thanks Sadbhav Singh [(@sadbhavsingh16)](https://github.com/sadbhavsingh16) for his help in preparing this assignment.
