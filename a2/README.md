@@ -287,7 +287,7 @@ rl_assignment/
 4. **(Optional)** Complete `bonus_challenges.py` for extra credit
 5. Submit your `user_code.py` (and `bonus_challenges.py` if attempting bonuses)
 6. Please submit it on [**Google Form**](https://forms.gle/zEUeykZbJvzh8LWj8) as a single zip file named <A1_StudentID>.zip or <A1_StudentID1_StudentID2>.zip. The zip file should contain a full code, running instructions, and analysis in the PDF file.
-- The submission date is **5:00 pm IST on Thursday, 19 Mar, 2026**. Late submission will incur a daily 10% score adjustment for up to two days.
+7. The submission deadline is **5:00 pm IST on Thursday, 19 Mar, 2026**. Late submission will incur a daily 10% score adjustment for up to two days.
 
 ## References
 
