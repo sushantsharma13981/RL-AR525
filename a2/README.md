@@ -1,4 +1,4 @@
-﻿# Assignment: Drone hovering using Model-free control
+﻿# Assignment: Drown hovering using Model-free control
  The goal of this assignment is to implement **Monte Carlo Control** and **Q-Learning** algorithms to teach a drone to hover at target position `[x, y, z]`. Drone hovering is challenging because small action errors accumulate quickly and the drone can drift or oscillate. The drone must balance exploration vs. stability, learn from delayed rewards, and generalize across nearby states to hold a steady hover. The expected behaviour of drone is shown below:
 ![Drone Hover Objective Demo](imgs/assignment_gif.gif)
 
@@ -23,14 +23,14 @@ pip install -e .
 
 # Then clone/use this assignment repo
 cd ..
-git clone https://github.com/zsxacdvbbnm16/a2-ar525.git
+git clone https://github.com/sadbhavsingh16/a2-ar525.git
 cd a2-ar525
 ```
 
 ### Option 2: Install via pip (if available)
 ```bash
 pip install gym-pybullet-drones
-git clone https://github.com/zsxacdvbbnm16/a2-ar525.git
+git clone https://github.com/sadbhavsingh16/a2-ar525.git
 cd a2-ar525
 ```
 
@@ -80,29 +80,62 @@ Console messages about threads/GL context shutdown/startup are normal PyBullet G
 | `Screenshot.png` | Visual preview of the environment |
 | `README.md` | This file with complete instructions |
 
-## Setup
+## Setup (Step-by-Step)
 
-```bash
-# Navigate to the assignment directory
-cd a2/   # or your-directory/
+1. **Clone and enter repo**
+  ```bash
+  git clone <this-repo-url>
+  cd a2
+  ```
+2. **Create and activate a virtual environment** (recommended)
+  ```bash
+  python -m venv venv
+  # Windows
+  venv\Scripts\activate
+  # Linux/macOS
+  source venv/bin/activate
+  ```
+3. **Install Python dependencies**
+  ```bash
+  pip install -r requirements.txt
+  ```
+4. **Install gym-pybullet-drones** (required)
+  - Option A (source, recommended):
+    ```bash
+    git clone https://github.com/utiasDSL/gym-pybullet-drones.git
+    cd gym-pybullet-drones
+    pip install -e .
+    cd ..
+    ```
+  - Option B (pip, if available):
+    ```bash
+    pip install gym-pybullet-drones
+    ```
+5. **Verify installation**
+  ```bash
+  python -m pip show gym-pybullet-drones
+  ```
 
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+## Quick-Start Procedure
 
-# Install dependencies
-pip install -r requirements.txt
-
-# IMPORTANT: Install gym-pybullet-drones
-# Option A: From source
-git clone https://github.com/utiasDSL/gym-pybullet-drones.git
-cd gym-pybullet-drones
-pip install -e .
-cd ../rl_assignment/
-
-# Option B: Direct install (if available)
-pip install gym-pybullet-drones
-```
+1. Activate your virtual environment.
+2. Run training for your implementations:
+  ```bash
+  python user_code.py
+  ```
+3. Evaluate both methods (deterministic, multi-seed recommended):
+  ```bash
+  python evaluate_submission.py --student_file user_code.py --method all --seed 42 --min_reward 220 --eval_seeds 3
+  ```
+4. Visualize reference implementations (PyBullet GUI opens):
+  ```bash
+  python monte_carlo.py
+  python td_learning.py
+  ```
+5. (Optional) Run bonus challenges:
+  ```bash
+  python bonus_challenges.py
+  ```
 
 ## Requirements
 
@@ -254,6 +287,9 @@ rl_assignment/
 ├── bonus_challenges.py      # Bonus challenges (optional)
 ├── evaluate_submission.py   # Grading script
 ├── Screenshot.png           # Visual preview of the environment
+└── .solutions/              # Reference solutions (hidden)
+    ├── monte_carlo.py
+    └── td_learning.py
 ```
 
 ## Submission
