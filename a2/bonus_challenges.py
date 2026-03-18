@@ -68,17 +68,6 @@ def discretize_state(state, num_bins=NUM_BINS):
         discrete.append(bin_idx)
     return tuple(discrete)
 
-def extract_position(obs):
-    """Extract (x, y, z) from HoverAviary observation."""
-    obs_arr = np.asarray(obs)
-    if obs_arr.ndim == 2:
-        return obs_arr[0, 0:3]
-    return obs_arr[0:3]
-
-def format_action(action_idx):
-    """Format discrete action index for ONE_D_RPM env.step()."""
-    return np.array([[float(action_idx - 1)]], dtype=np.float32)
-
 def get_action_space_size():
     return 3
 
@@ -100,12 +89,12 @@ def evaluate_policy(env, q_table, num_episodes=10):
     rewards = []
     for _ in range(num_episodes):
         state, _ = env.reset()
-        state = discretize_state(extract_position(state))
+        state = discretize_state(state[0:3])
         total_reward = 0
         for _ in range(MAX_STEPS):
             action = np.argmax(q_table[state])
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state = discretize_state(extract_position(next_obs))
+            next_state, reward, terminated, truncated, _ = env.step([action])
+            next_state = discretize_state(next_state[0:3])
             total_reward += reward
             state = next_state
             if terminated or truncated:
@@ -134,18 +123,18 @@ def run_sarsa(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA, alph
     
     for episode in range(num_episodes):
         state, _ = env.reset()
-        state = discretize_state(extract_position(state))
-
+        state = discretize_state(state[0:3])
+        
         # Choose initial action using epsilon-greedy
         action = choose_action(q_table, state, epsilon)
-
+        
         total_reward = 0
-
+        
         for step in range(MAX_STEPS):
             # Take action
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state = discretize_state(extract_position(next_obs))
-
+            next_state, reward, terminated, truncated, _ = env.step([action])
+            next_state = discretize_state(next_state[0:3])
+            
             # Choose next action using epsilon-greedy (SARSA)
             next_action = choose_action(q_table, next_state, epsilon)
             
@@ -186,17 +175,17 @@ def run_double_q_learning(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma
     
     for episode in range(num_episodes):
         state, _ = env.reset()
-        state = discretize_state(extract_position(state))
-
+        state = discretize_state(state[0:3])
+        
         total_reward = 0
-
+        
         for step in range(MAX_STEPS):
             # Choose action using average of Q1 and Q2
             action = np.argmax(q1[state] + q2[state])
-
+            
             # Take action
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state = discretize_state(extract_position(next_obs))
+            next_state, reward, terminated, truncated, _ = env.step([action])
+            next_state = discretize_state(next_state[0:3])
             
             # Randomly choose which Q-table to update
             if np.random.random() < 0.5:
@@ -264,17 +253,17 @@ def run_td_with_replay(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GA
     
     for episode in range(num_episodes):
         state, _ = env.reset()
-        state = discretize_state(extract_position(state))
-
+        state = discretize_state(state[0:3])
+        
         total_reward = 0
-
+        
         for step in range(MAX_STEPS):
             # Choose action using epsilon-greedy
             action = choose_action(q_table, state, epsilon)
-
+            
             # Take action
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state_discrete = discretize_state(extract_position(next_obs))
+            next_state, reward, terminated, truncated, _ = env.step([action])
+            next_state_discrete = discretize_state(next_state[0:3])
             
             # Store experience
             replay_buffer.push(state, action, reward, next_state_discrete, terminated or truncated)

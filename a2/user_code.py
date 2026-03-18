@@ -117,12 +117,12 @@ def evaluate_policy(env, q_table, num_episodes=10):
 
 def run_monte_carlo(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA, alpha=ALPHA):
     """
-    Monte Carlo Control (first-visit MC with epsilon-greedy exploration).
+    TODO: Implement Monte Carlo Control (first-visit MC).
 
     Steps:
     1. Generate episodes with epsilon-greedy policy.
-    2. Compute discounted returns G_t backwards.
-    3. Update Q-values using first-visit MC: Q(s,a) += alpha * (G - Q(s,a)).
+    2. Compute discounted returns G_t.
+    3. Update Q-values using first-visit MC averaging.
     4. Track episode reward for each episode.
 
     Returns:
@@ -131,42 +131,8 @@ def run_monte_carlo(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA
     q_table = initialize_q_table()
     episode_rewards = []
 
-    for episode in range(num_episodes):
-        # --- Generate one episode ---
-        trajectory = []  # list of (state, action, reward)
-        state, _ = env.reset()
-        state = discretize_state(extract_position(state))
-        total_reward = 0.0
-
-        for _ in range(MAX_STEPS):
-            action = choose_action(q_table, state, epsilon)
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state = discretize_state(extract_position(next_obs))
-
-            trajectory.append((state, action, reward))
-            total_reward += reward
-            state = next_state
-
-            if terminated or truncated:
-                break
-
-        episode_rewards.append(total_reward)
-
-        # --- Compute returns and update Q-table (first-visit MC) ---
-        visited = set()
-        G = 0.0
-        for state_t, action_t, reward_t in reversed(trajectory):
-            G = reward_t + gamma * G
-            # First-visit: only update the first occurrence in the episode
-            if (state_t, action_t) not in visited:
-                visited.add((state_t, action_t))
-                q_table[state_t][action_t] += alpha * (G - q_table[state_t][action_t])
-
-        if (episode + 1) % 50 == 0:
-            avg = np.mean(episode_rewards[-50:])
-            print(f"MC Episode {episode + 1}/{num_episodes}, Avg Reward (last 50): {avg:.2f}")
-
-    return q_table, episode_rewards
+    # TODO: Replace this placeholder implementation.
+    raise NotImplementedError("Implement run_monte_carlo()")
 
 # ========================================
 # TODO: TD LEARNING IMPLEMENTATION (Q-LEARNING)
@@ -174,7 +140,7 @@ def run_monte_carlo(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA
 
 def run_q_learning(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA, alpha=ALPHA):
     """
-    Q-Learning (off-policy TD control).
+    TODO: Implement Q-Learning (off-policy TD control).
 
     Update rule:
     Q(s,a) = Q(s,a) + alpha * [r + gamma * max_a' Q(s',a') - Q(s,a)]
@@ -185,36 +151,8 @@ def run_q_learning(env, num_episodes=NUM_EPISODES, epsilon=EPSILON, gamma=GAMMA,
     q_table = initialize_q_table()
     episode_rewards = []
 
-    for episode in range(num_episodes):
-        state, _ = env.reset()
-        state = discretize_state(extract_position(state))
-        total_reward = 0.0
-
-        for _ in range(MAX_STEPS):
-            # Choose action epsilon-greedy
-            action = choose_action(q_table, state, epsilon)
-
-            # Step environment
-            next_obs, reward, terminated, truncated, _ = env.step(format_action(action))
-            next_state = discretize_state(extract_position(next_obs))
-
-            # Q-Learning update: use greedy max over next state
-            td_target = reward + gamma * np.max(q_table[next_state])
-            q_table[state][action] += alpha * (td_target - q_table[state][action])
-
-            total_reward += reward
-            state = next_state
-
-            if terminated or truncated:
-                break
-
-        episode_rewards.append(total_reward)
-
-        if (episode + 1) % 50 == 0:
-            avg = np.mean(episode_rewards[-50:])
-            print(f"Q-Learning Episode {episode + 1}/{num_episodes}, Avg Reward (last 50): {avg:.2f}")
-
-    return q_table, episode_rewards
+    # TODO: Replace this placeholder implementation.
+    raise NotImplementedError("Implement run_q_learning()")
 
 # ========================================
 # MAIN FUNCTION (Do not modify)
