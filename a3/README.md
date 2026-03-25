@@ -134,6 +134,7 @@ Run `python main.py --mode test --algo sac --task jump --episodes 10` and collec
 
 Present results across your three hyperparameter configurations in a table. 
 Write a short analysis (~200 words) discussing which configuration performed best and why.
+
 ---
 
 ## Submission checklist
@@ -144,7 +145,7 @@ Your submission must include:
 - Evaluation metrics table (Task 3)
 - Brief conclusion: what made the agent succeed or struggle?
 - Please submit it on [**Google Form**](https://forms.gle/cNuCb51f9HShMg4j7) as a single zip file named <A1_StudentID>.zip or <A1_StudentID1_StudentID2>.zip. The zip file should contain a full code, running instructions, and analysis in the PDF file.
-- The submission deadline is **5:00 pm IST on Thursday, 16 Apr, 2026**. Late submission will incur a daily 10% score adjustment for up to two days.
+- The submission deadline is **5:00 pm IST on Wednesday, 15 Apr, 2026**. Late submission will incur a daily 10% score adjustment for up to two days.
 
 ---
 
