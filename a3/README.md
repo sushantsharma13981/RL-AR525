@@ -7,6 +7,7 @@ In this assignment, you will train a simulated biped robot to **jump off a 1 m p
 <p align="center">
   <img src="sample.gif" alt="animated" />
 </p>
+
 The robot spawns on top of a 1 m tall platform and must:
 1. **Crouch and leap** off the edge
 2. **Maintain an upright orientation** during flight
