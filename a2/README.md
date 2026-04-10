@@ -209,7 +209,7 @@ Note: `user_code.py` runs with `gui=False` by default for faster grading/trainin
 
 ### What You Should See During Visualization
 
-- The drone should increasingly stabilize near `z = 1.0` as training progresses.
+- The drone should increasingly stabilize near `z = d` () as training progresses.
 - In `td_learning.py`, the GUI window may close and reopen once: this is expected because the script runs **Q-Learning first**, then resets and runs **SARSA**.
 - Console messages about threads/GL context shutdown/startup are normal PyBullet GUI lifecycle logs.
 
